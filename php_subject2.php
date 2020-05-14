@@ -27,13 +27,17 @@
     
     <?php //処理の関数
     function fizzbuzzArray($fizz, $buzz)
-    {$fizz = $_POST['fizz'];
-     $buzz = $_POST['buzz'];    
-        for($i = 1; $i < 100; $i++)
-        {
-        if($i % $fizz == 0 && $i % $buzz == 0){echo "FizzBuzz"." ".$i.'<br>';}
-        elseif($i % $fizz == 0){echo "Fizz"." ".$i.'<br>';}
-        elseif($i % $buzz == 0){echo "Buzz"." ".$i.'<br>';}
+    {
+        $fizz = $_POST['fizz'];
+        $buzz = $_POST['buzz'];    
+        for($i = 1; $i < 100; $i++) {
+            if($i % $fizz == 0 && $i % $buzz == 0) {
+                echo "FizzBuzz"." ".$i.'<br>';
+            } elseif ($i % $fizz == 0) {
+                echo "Fizz"." ".$i.'<br>';
+            } elseif ($i % $buzz == 0) {
+                echo "Buzz"." ".$i.'<br>';
+            }
         }
     }
     ?>
@@ -43,15 +47,18 @@
     //FizzNum, BuzzNumともに整数を入力済み　→　関数fizzbuzzArrayの処理を実行
     //FizzNum, BuzzNumともに入力済みだが、少なくとも一方が小数または文字列　→　「FizzNumとBuzzNumに整数を入力してください」と出力
     
-    if ($_SERVER["REQUEST_METHOD"] != "POST") {echo " ";}
-    elseif(empty($_POST['fizz']) || empty($_POST['buzz'])) {echo "FizzNumとBuzzNumに数字を入力してください";}
-    elseif (preg_match('/^[0-9]+$/', $_POST['fizz']) && preg_match('/^[0-9]+$/', $_POST['buzz'])) 
-        {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    if(empty($_POST['fizz']) || empty($_POST['buzz'])) {
+        echo "FizzNumとBuzzNumに数字を入力してください";
+        } elseif (preg_match('/^[0-9]+$/', $_POST['fizz']) && preg_match('/^[0-9]+$/', $_POST['buzz'])) {
          $fizz = $_POST['fizz'];
          $buzz = $_POST['buzz'];  
-         echo fizzbuzzArray($fizz, $buzz);
+            echo fizzbuzzArray($fizz, $buzz);
+        } else {
+            echo "FizzNumとBuzzNumに整数を入力してください";
         }
-    else {echo "FizzNumとBuzzNumに整数を入力してください";}
+    }
     ?>
 </body>
 </html>
